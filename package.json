@@ -8,7 +8,7 @@
   "scripts": {
     "flow": "flow",
     "start": "rimraf ./build && babel -d ./build ./server -s && node ./build/server.js",
-    "start:dev": "flow && ./server/index.js"
+    "start:dev": "server/index.js"
   },
   "dependencies": {
     "babel-core": "^6.26.0",
@@ -16,7 +16,10 @@
     "babel-preset-flow": "^6.23.0",
     "babel-preset-react": "^6.24.1",
     "babel-register": "^6.26.0",
+    "body-parser": "^1.18.2",
     "express": "^4.16.2",
+    "flow-typed": "^2.3.0",
+    "global": "^4.3.2",
     "nodemon": "^1.14.12",
     "rimraf": "^2.6.2"
   },
