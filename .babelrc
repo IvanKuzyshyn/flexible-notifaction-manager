@@ -13,6 +13,9 @@
     ],
     [
       "flow"
+    ],
+    [
+      "react-app"
     ]
   ],
   "plugins": [
