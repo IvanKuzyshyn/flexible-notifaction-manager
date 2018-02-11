@@ -8,15 +8,9 @@
         }
       }
     ],
-    [
-      "react"
-    ],
-    [
-      "flow"
-    ],
-    [
-      "react-app"
-    ]
+    "react",
+    "flow",
+    "react-app"
   ],
   "plugins": [
     "syntax-class-properties",
