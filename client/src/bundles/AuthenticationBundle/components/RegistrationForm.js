@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
 
-const RegistrationForm = ({ onChange }) => (
+const RegistrationForm = ({ onChange, onSubmit }) => (
   <div className="registration-form">
     <TextField label="First name" onChange={onChange('firstName')} fullWidth />
     <TextField label="Last name" onChange={onChange('lastName')} fullWidth />
@@ -25,7 +25,7 @@ const RegistrationForm = ({ onChange }) => (
       variant="password"
       fullWidth
     />
-    <Button variant="raised" color="primary">
+    <Button variant="raised" color="primary" onClick={onSubmit}>
       Register
     </Button>
   </div>
@@ -33,6 +33,7 @@ const RegistrationForm = ({ onChange }) => (
 
 RegistrationForm.propTypes = {
   onChange: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };
 
 export default RegistrationForm;
