@@ -16,6 +16,7 @@
     "es6": true
   },
   "rules": {
+    "import/prefer-default-export": 0,
     "func-names": ["error", "as-needed"],
     "react/jsx-filename-extension": [
       1,
