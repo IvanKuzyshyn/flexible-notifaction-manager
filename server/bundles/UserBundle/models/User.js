@@ -1,6 +1,8 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
+import bcrypt from 'mongoose-bcrypt';
+import timestamps from 'mongoose-timestamp';
 
-const userSchema = new mongoose.Schema({
+const UserSchema = new Schema({
   firstName: {
     type: String,
     required: true,
@@ -17,6 +19,7 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     min: 6,
+    bcrypt: true,
   },
   isAdmin: {
     type: Boolean,
@@ -24,15 +27,9 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-userSchema.statics.findByName = (searchPhrase, callback) =>
-  this.findOne(
-    {
-      firsName: new RegExp(searchPhrase, 'i'),
-      lastName: new RegExp(searchPhrase, 'i'),
-    },
-    callback,
-  );
+UserSchema.plugin(bcrypt);
+UserSchema.plugin(timestamps);
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model('User', UserSchema);
 
 export default User;
