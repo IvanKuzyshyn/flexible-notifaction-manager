@@ -1,7 +1,6 @@
 import strategies from 'passport-local';
 
 import User from '../../../UserBundle/models/User';
-import { createHash } from '../../services/bcrypt';
 
 export default function(passport) {
   const LocalStrategy = strategies.Strategy;
@@ -27,7 +26,7 @@ export default function(passport) {
               firstName,
               lastName,
               email,
-              password: createHash(password),
+              password,
             });
             await newUser.save();
 
