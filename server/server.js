@@ -1,12 +1,13 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import path from 'path';
+import passport from 'passport';
 
 import { PORT } from './app/config/server.config';
 import { connectDb } from './app/db/db';
-
 // Test features
-import User from './bundles/UserBundle/models/User';
+import authenticatePassport from './bundles/AuthenticationBundle/passport/init';
+import authenticationRoutes from './bundles/AuthenticationBundle/routes/api';
 
 const app = express();
 
@@ -18,32 +19,25 @@ app.use(bodyParser.json());
 
 // TODO Refactor with accessible service
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept',
+  );
   next();
 });
 
-// TODO: Replace to UserBundle controllers
-app.get('/api/users', (req, res) => {
-  User.find({}, (err, users) => {
-    if(err) res.status(500).send('Error occurred when try to find users');
+app.use(passport.initialize());
+app.use(passport.session());
 
-    res.send(users);
-  });
-});
+authenticatePassport(passport);
 
-// TODO: Replace to AuthenticateBundle controllers
-app.post('/api/sign-up', async (req, res) => {
-  try {
-    const newUser = new User(req.body);
-    const savedUser = await newUser.save();
+app.use('/', authenticationRoutes(passport));
 
-    console.log('SAVED USER', savedUser);
-
-    res.status(200).send('User created!');
-  } catch(error) {
-    res.status(500).send(error);
-  }
+app.use(function(req, res, next) {
+  const err = new Error('Not Found');
+  err.status = 404;
+  next(err);
 });
 
 const startServer = () => {

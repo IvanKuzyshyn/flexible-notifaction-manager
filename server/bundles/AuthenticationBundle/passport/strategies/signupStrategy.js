@@ -10,17 +10,19 @@ export default function(passport) {
     new LocalStrategy(
       {
         passReqToCallback: true,
+        usernameField: 'email',
+        passwordField: 'password',
       },
-      async (req, done) => {
-        const { email } = req.param;
-
+      async (req, email, password, done) => {
         try {
           const user = await User.findOne({ email });
 
           if (user) {
-            return done(new Error(`User with ${email} email already exists!`));
+            return done(
+              new Error(`User with '${email}' email already exists!`),
+            );
           } else {
-            const { firstName, lastName, password } = req.body;
+            const { firstName, lastName } = req.body;
 
             const newUser = new User({
               firstName,
