@@ -7,5 +7,9 @@ export default function(passport) {
     res.status(200).send(req.body);
   });
 
+  router.post('/api/sign-in', passport.authenticate('sign-in'), (req, res) => {
+    res.status(200).send(req.body);
+  });
+
   return router;
 }
