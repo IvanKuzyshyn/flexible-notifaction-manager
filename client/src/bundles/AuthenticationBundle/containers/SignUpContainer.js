@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
-import RegistrationForm from '../components/RegistrationForm';
+import RegistrationForm from '../components/SignUpForm';
 import { registerUserAction } from '../reducers/authenticationReducer';
 
 class RegistrationContainer extends Component {

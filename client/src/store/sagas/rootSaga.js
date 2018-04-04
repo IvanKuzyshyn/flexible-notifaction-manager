@@ -1,7 +1,7 @@
 import { all, fork } from 'redux-saga/effects';
 
-import authenticationSaga from '../../bundles/AuthenticationBundle/sagas/authenticationSaga';
+import securitySaga from '../../bundles/SecurityBundle/sagas/securitySaga';
 
 export default function*() {
-  yield all([fork(authenticationSaga)]);
+  yield all([fork(securitySaga)]);
 }

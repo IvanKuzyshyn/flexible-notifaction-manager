@@ -4,7 +4,7 @@ import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
 
 const RegistrationForm = ({ onChange, onSubmit }) => (
-  <div className="registration-form">
+  <div className="sign-up-form">
     <TextField label="First name" onChange={onChange('firstName')} fullWidth />
     <TextField label="Last name" onChange={onChange('lastName')} fullWidth />
     <TextField
@@ -26,7 +26,7 @@ const RegistrationForm = ({ onChange, onSubmit }) => (
       fullWidth
     />
     <Button variant="raised" color="primary" onClick={onSubmit}>
-      Register
+      Sign up
     </Button>
   </div>
 );
