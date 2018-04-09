@@ -1,5 +1,6 @@
 const initialState = {
-  registering: false,
+  authenticating: false,
+  authenticatingError: null,
 };
 
 // ------------------------------------
@@ -11,20 +12,23 @@ export const USER_SIGN_UP_SUCCESS =
   '@@AuthenticationBundle/authentication/USER_SIGN_UP_SUCCESS';
 export const USER_SIGN_UP_FAIL =
   '@@AuthenticationBundle/authentication/USER_SIGN_UP_FAIL';
+export const USER_SIGN_IN = '@@AuthenticationBundle/authentication/USER_SIGN_IN';
+export const USER_SIGN_IN_SUCCESS = '@@AuthenticationBundle/authentication/USER_SIGN_IN_SUCCESS';
+export const USER_SIGN_IN_FAIL = '@@AuthenticationBundle/authentication/USER_SIGN_IN_FAIL';
 
 // ------------------------------------
 // Action creators
 // ------------------------------------
-export const registerUserAction = formData => ({
+export const userSignUpAction = formData => ({
   type: USER_SIGN_UP,
   payload: { formData },
 });
 
-export const registerUserSuccessAction = () => ({
+export const userSignUpSuccessAction = () => ({
   type: USER_SIGN_UP_SUCCESS,
 });
 
-export const registerUserFailAction = () => ({
+export const userSignUpFailAction = () => ({
   type: USER_SIGN_UP_FAIL,
 });
 
@@ -34,15 +38,15 @@ export const registerUserFailAction = () => ({
 const ACTION_HANDLERS = {
   [USER_SIGN_UP]: state => ({
     ...state,
-    registering: true,
+    authenticating: true,
   }),
   [USER_SIGN_UP_SUCCESS]: state => ({
     ...state,
-    registering: false,
+    authenticating: false,
   }),
   [USER_SIGN_UP_FAIL]: state => ({
     ...state,
-    registering: false,
+    authenticating: false,
   }),
 };
 

@@ -1,12 +1,15 @@
 // @flow
 
-import type { GuardableInterface } from '../interfaces/GuardableInterface';
+import type { GuardInterface } from '../interfaces/GuardableInterface';
 
-export default class AuthenticationGuard implements GuardableInterface {
+class AuthenticationGuard implements GuardInterface {
 
-  static can(): boolean {
+  can(): boolean {
+    console.log(this);
     // TODO implement guard after complete user bundle
     return false;
   }
 
 }
+
+export default new AuthenticationGuard();

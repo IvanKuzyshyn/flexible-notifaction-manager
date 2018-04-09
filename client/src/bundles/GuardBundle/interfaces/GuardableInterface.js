@@ -1,5 +1,5 @@
 // @flow
 
-export interface GuardableInterface {
+export interface GuardInterface {
   can(): boolean;
 }
