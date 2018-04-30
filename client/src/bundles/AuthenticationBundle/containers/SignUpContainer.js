@@ -11,23 +11,28 @@ class RegistrationContainer extends Component {
     userSignUpAction: PropTypes.func.isRequired,
   };
 
-  handleChangeFormField = fieldName => event => {
-    this.setState({
-      [fieldName]: event.target.value,
-    });
-  };
-
-  handleSubmitRegistrationForm = () => {
+  handleSubmitForm = form => {
     const { userSignUpAction: signUp } = this.props;
 
-    signUp(this.state);
+    signUp(form);
+  };
+
+  handleValidateForm = values => {
+    const errors = {};
+    const { password, confirmPassword } = values;
+
+    if (password !== confirmPassword) {
+      errors.confirmPassword = 'Confirm password must be the same as password!';
+    }
+
+    return errors;
   };
 
   render() {
     return (
       <RegistrationForm
-        onChange={this.handleChangeFormField}
-        onSubmit={this.handleSubmitRegistrationForm}
+        onSubmit={this.handleSubmitForm}
+        onValidate={this.handleValidateForm}
       />
     );
   }
