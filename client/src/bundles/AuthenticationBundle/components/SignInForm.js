@@ -4,10 +4,11 @@ import { TextField, Button } from 'material-ui';
 import { Link } from 'react-router-dom';
 import Card, { CardContent, CardActions } from 'material-ui/Card';
 import Divider from 'material-ui/Divider';
+import { LinearProgress } from 'material-ui/Progress';
 
 import { SIGN_UP_ROUTE } from '../constants/routes';
 
-const SignInForm = ({ onSubmit, onChange }) => (
+const SignInForm = ({ onSubmit, onChange, isSigningIn }) => (
   <div className="sign-in-form">
     <Card>
       <CardContent>
@@ -34,6 +35,7 @@ const SignInForm = ({ onSubmit, onChange }) => (
           <Button color="secondary">Register</Button>
         </Link>
       </CardActions>
+      {isSigningIn && <LinearProgress />}
     </Card>
   </div>
 );
@@ -41,6 +43,7 @@ const SignInForm = ({ onSubmit, onChange }) => (
 SignInForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
+  isSigningIn: PropTypes.bool.isRequired,
 };
 
 export default SignInForm;

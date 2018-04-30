@@ -32,6 +32,19 @@ export const userSignUpFailAction = () => ({
   type: USER_SIGN_UP_FAIL,
 });
 
+export const userSignInAction = formData => ({
+  type: USER_SIGN_IN,
+  payload: { formData },
+});
+
+export const userSignInSuccessAction = () => ({
+  type: USER_SIGN_IN_SUCCESS,
+});
+
+export const userSignInFailAction = () => ({
+  type: USER_SIGN_IN_FAIL,
+});
+
 // ------------------------------------
 // Action handlers
 // ------------------------------------
@@ -45,6 +58,18 @@ const ACTION_HANDLERS = {
     authenticating: false,
   }),
   [USER_SIGN_UP_FAIL]: state => ({
+    ...state,
+    authenticating: false,
+  }),
+  [USER_SIGN_IN]: state => ({
+    ...state,
+    authenticating: true,
+  }),
+  [USER_SIGN_IN_SUCCESS]: state => ({
+    ...state,
+    authenticating: false,
+  }),
+  [USER_SIGN_IN_FAIL]: state => ({
     ...state,
     authenticating: false,
   }),
