@@ -15,7 +15,6 @@ export default function(passport) {
         passwordField: 'password',
       },
       async (req, email, password, done) => {
-        console.log('BEFORE FIND!');
         try {
           const user = await User.findOne({ email }).exec();
           const isPasswordsEqual = await compare(password, user.password);
