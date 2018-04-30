@@ -12,11 +12,7 @@ import { SIGN_UP_ROUTE } from '../constants/routes';
 import TextField from '../../CommonBundle/components/forms/TextField';
 import Checkbox from '../../CommonBundle/components/forms/Checkbox';
 import { composeValidators } from '../../CommonBundle/validators/utils';
-import {
-  isRequired,
-  mustBeEmail,
-  minLimit,
-} from '../../CommonBundle/validators/fields';
+import { isRequired, mustBeEmail } from '../../CommonBundle/validators/fields';
 
 const SignInForm = ({ onSubmit, isSigningIn }) => (
   <div className="sign-in-form">
@@ -40,7 +36,7 @@ const SignInForm = ({ onSubmit, isSigningIn }) => (
                 component={TextField}
                 type="password"
                 placeholder="Password"
-                validate={composeValidators(isRequired, minLimit(8))}
+                validate={isRequired}
                 fullWidth
               />
             </CardContent>
