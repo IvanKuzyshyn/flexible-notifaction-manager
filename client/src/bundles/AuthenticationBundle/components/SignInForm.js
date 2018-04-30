@@ -19,7 +19,7 @@ const SignInForm = ({ onSubmit, isSigningIn }) => (
     <Card>
       <Form
         onSubmit={onSubmit}
-        initialValues={{ email: '', password: '', remember: true }}
+        initialValues={{ remember: true }}
         render={({ handleSubmit, submitting }) => (
           <form onSubmit={handleSubmit}>
             <CardContent>
