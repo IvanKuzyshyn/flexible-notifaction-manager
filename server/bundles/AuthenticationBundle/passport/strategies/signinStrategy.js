@@ -17,10 +17,19 @@ export default function(passport) {
       async (req, email, password, done) => {
         try {
           const user = await User.findOne({ email }).exec();
+
+          if (!user) {
+            return done(null, false, {
+              message: `User not found. If you forgot password you can recover it.`,
+            });
+          }
+
           const isPasswordsEqual = await compare(password, user.password);
 
-          if (!user || !isPasswordsEqual) {
-            done(null, false, `User not found or passed wrong credentials`);
+          if (!isPasswordsEqual) {
+            return done(null, false, {
+              message: `Your credentials are wrong.`,
+            });
           }
 
           return done(null, user);
