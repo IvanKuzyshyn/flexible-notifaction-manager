@@ -18,7 +18,9 @@ export default function(passport) {
           const user = await User.findOne({ email });
 
           if (user) {
-            return done(`User with '${email}' email already exists!`);
+            return done(null, false, {
+              message: `User with '${email}' email already exists!`,
+            });
           } else {
             const { firstName, lastName } = req.body;
 
