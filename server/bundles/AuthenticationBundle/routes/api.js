@@ -1,5 +1,5 @@
 import express from 'express';
-import Response, { ServerResponse } from '../../CoreBundle/services/Response';
+import Response from '../../CoreBundle/services/Response';
 
 const router = express.Router();
 
