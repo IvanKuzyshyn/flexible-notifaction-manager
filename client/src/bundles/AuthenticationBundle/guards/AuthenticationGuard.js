@@ -1,6 +1,6 @@
 // @flow
 
-import type { GuardInterface } from '../interfaces/GuardableInterface';
+import type { GuardInterface } from '../../CommonBundle/interfaces/GuardableInterface';
 
 class AuthenticationGuard implements GuardInterface {
 

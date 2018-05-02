@@ -4,7 +4,7 @@ import { Route, Redirect, Switch } from 'react-router';
 import * as routes from '../constants/routes';
 import SignUpContainer from '../containers/SignUpContainer';
 import SignInContainer from '../containers/SignInContainer';
-import AuthenticationGuard from '../../GuardBundle/guards/AuthenticationGuard';
+import AuthenticationGuard from '../guards/AuthenticationGuard';
 
 const Routes = () => (
   <Fragment>
