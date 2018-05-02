@@ -5,11 +5,18 @@ import { bindActionCreators } from 'redux';
 
 import { userSignInAction } from '../reducers/authenticationReducer';
 import SignInForm from '../components/SignInForm';
+import { errorResponseType } from '../../CommonBundle/prop-types/response-types';
+import { signInDataSelector } from '../selectors/authenticationSelectors';
 
 class SignInContainer extends Component {
   static propTypes = {
     userSignInAction: PropTypes.func.isRequired,
-    authenticating: PropTypes.bool.isRequired,
+    isProcessing: PropTypes.bool.isRequired,
+    error: errorResponseType,
+  };
+
+  static defaultProps = {
+    error: null,
   };
 
   handleSubmitForm = form => {
@@ -19,20 +26,19 @@ class SignInContainer extends Component {
   };
 
   render() {
-    const { authenticating } = this.props;
+    const { isProcessing, error } = this.props;
 
     return (
       <SignInForm
         onSubmit={this.handleSubmitForm}
-        isSigningIn={authenticating}
+        isSigningIn={isProcessing}
+        error={error}
       />
     );
   }
 }
 
-const mapStateToProps = ({ authentication }) => ({
-  authenticating: authentication.authenticating,
-});
+const mapStateToProps = state => signInDataSelector(state);
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ userSignInAction }, dispatch);
 

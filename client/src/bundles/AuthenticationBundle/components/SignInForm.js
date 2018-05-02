@@ -7,14 +7,17 @@ import Divider from 'material-ui/Divider';
 import { LinearProgress } from 'material-ui/Progress';
 import { FormControlLabel } from 'material-ui/Form';
 import { Field, Form } from 'react-final-form';
+import Paper from 'material-ui/Paper';
+import Typography from 'material-ui/Typography';
 
 import { SIGN_UP_ROUTE } from '../constants/routes';
 import TextField from '../../CommonBundle/components/forms/TextField';
 import Checkbox from '../../CommonBundle/components/forms/Checkbox';
 import { composeValidators } from '../../CommonBundle/validators/utils';
 import { isRequired, mustBeEmail } from '../../CommonBundle/validators/fields';
+import { errorResponseType } from '../../CommonBundle/prop-types/response-types';
 
-const SignInForm = ({ onSubmit, isSigningIn }) => (
+const SignInForm = ({ onSubmit, isSigningIn, error }) => (
   <div className="sign-in-form">
     <Card>
       <Form
@@ -39,6 +42,13 @@ const SignInForm = ({ onSubmit, isSigningIn }) => (
                 validate={isRequired}
                 fullWidth
               />
+              {error && (
+                <Paper elevation={4}>
+                  <Typography variant="title" gutterBottom>
+                    {error.message}
+                  </Typography>
+                </Paper>
+              )}
             </CardContent>
             <CardActions>
               <Button
@@ -72,6 +82,11 @@ const SignInForm = ({ onSubmit, isSigningIn }) => (
 SignInForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   isSigningIn: PropTypes.bool.isRequired,
+  error: errorResponseType,
+};
+
+SignInForm.defaultProps = {
+  error: null,
 };
 
 export default SignInForm;
