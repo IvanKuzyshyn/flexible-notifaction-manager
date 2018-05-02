@@ -5,7 +5,7 @@ const router = express.Router();
 
 export default function(passport) {
   router.post('/api/sign-up', (req, res, next) => {
-    passport.authenticate('sign-up', (error, user, info) => {
+    passport.authenticate('sign-up', (error, data, info) => {
       try {
         if (error) {
           Response.sendServerError(res, {
@@ -15,7 +15,7 @@ export default function(passport) {
           return;
         }
 
-        if (!user) {
+        if (!data) {
           Response.sendInvalidRequest(res, {
             statusDescription: info.message,
           });
@@ -23,11 +23,14 @@ export default function(passport) {
           return;
         }
 
+        const { user, token } = data;
+
         Response.sendOk(res, {
           result: {
             firstName: user.firstName,
             lastName: user.lastName,
             email: user.email,
+            token,
           },
         });
       } catch (e) {
@@ -40,7 +43,7 @@ export default function(passport) {
   });
 
   router.post('/api/sign-in', (req, res, next) => {
-    passport.authenticate('sign-in', (error, user, info) => {
+    passport.authenticate('sign-in', (error, data, info) => {
       if (error) {
         Response.sendServerError(res, {
           statusDescription: error.message,
@@ -50,9 +53,7 @@ export default function(passport) {
       }
 
       try {
-        console.log(res.body);
-
-        if (!user) {
+        if (!data) {
           Response.sendInvalidRequest(res, {
             statusDescription: info.message,
           });
@@ -60,11 +61,14 @@ export default function(passport) {
           return;
         }
 
+        const { user, token } = data;
+
         Response.sendOk(res, {
           result: {
             firstName: user.firstName,
             lastName: user.lastName,
             email: user.email,
+            token,
           },
         });
       } catch (e) {

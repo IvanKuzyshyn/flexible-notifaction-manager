@@ -1,6 +1,7 @@
 import strategies from 'passport-local';
 
 import User from '../../../UserBundle/models/User';
+import TokenService from '../../../SecurityBundle/services/TokenService';
 
 export default function(passport) {
   const LocalStrategy = strategies.Strategy;
@@ -24,15 +25,19 @@ export default function(passport) {
           } else {
             const { firstName, lastName } = req.body;
 
-            const newUser = new User({
+            const user = new User({
               firstName,
               lastName,
               email,
               password,
             });
-            await newUser.save();
+            await user.save();
+            const token = await TokenService.create({
+              email: user.email,
+              id: user._id,
+            });
 
-            return done(null, newUser);
+            return done(null, { user, token });
           }
         } catch (error) {
           done(error);

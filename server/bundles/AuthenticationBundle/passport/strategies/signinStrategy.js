@@ -2,6 +2,7 @@ import strategies from 'passport-local';
 
 import User from '../../../UserBundle/models/User';
 import { compare } from '../../../SecurityBundle/services/bcrypt';
+import TokenService from '../../../SecurityBundle/services/TokenService';
 
 export default function(passport) {
   const LocalStrategy = strategies.Strategy;
@@ -32,7 +33,12 @@ export default function(passport) {
             });
           }
 
-          return done(null, user);
+          const token = await TokenService.create({
+            email: user.email,
+            id: user._id,
+          });
+
+          return done(null, { user, token });
         } catch (error) {
           done(error);
         }
