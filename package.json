@@ -42,6 +42,7 @@
     "flow-typed": "^2.3.0",
     "fwsp-server-response": "^2.2.6",
     "history": "^4.7.2",
+    "jsonwebtoken": "^8.2.1",
     "material-ui": "^1.0.0-beta.33",
     "mongoose": "^5.0.4",
     "mongoose-bcrypt": "^1.5.0",
