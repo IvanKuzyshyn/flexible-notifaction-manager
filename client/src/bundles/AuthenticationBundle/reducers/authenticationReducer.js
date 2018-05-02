@@ -1,6 +1,8 @@
 const initialState = {
-  authenticating: false,
-  authenticatingError: null,
+  isSigningIn: false,
+  isSigningUp: false,
+  signingInError: null,
+  signingUpError: null,
 };
 
 // ------------------------------------
@@ -12,9 +14,12 @@ export const USER_SIGN_UP_SUCCESS =
   '@@AuthenticationBundle/authentication/USER_SIGN_UP_SUCCESS';
 export const USER_SIGN_UP_FAIL =
   '@@AuthenticationBundle/authentication/USER_SIGN_UP_FAIL';
-export const USER_SIGN_IN = '@@AuthenticationBundle/authentication/USER_SIGN_IN';
-export const USER_SIGN_IN_SUCCESS = '@@AuthenticationBundle/authentication/USER_SIGN_IN_SUCCESS';
-export const USER_SIGN_IN_FAIL = '@@AuthenticationBundle/authentication/USER_SIGN_IN_FAIL';
+export const USER_SIGN_IN =
+  '@@AuthenticationBundle/authentication/USER_SIGN_IN';
+export const USER_SIGN_IN_SUCCESS =
+  '@@AuthenticationBundle/authentication/USER_SIGN_IN_SUCCESS';
+export const USER_SIGN_IN_FAIL =
+  '@@AuthenticationBundle/authentication/USER_SIGN_IN_FAIL';
 
 // ------------------------------------
 // Action creators
@@ -28,8 +33,9 @@ export const userSignUpSuccessAction = () => ({
   type: USER_SIGN_UP_SUCCESS,
 });
 
-export const userSignUpFailAction = () => ({
+export const userSignUpFailAction = error => ({
   type: USER_SIGN_UP_FAIL,
+  error,
 });
 
 export const userSignInAction = formData => ({
@@ -41,8 +47,9 @@ export const userSignInSuccessAction = () => ({
   type: USER_SIGN_IN_SUCCESS,
 });
 
-export const userSignInFailAction = () => ({
+export const userSignInFailAction = error => ({
   type: USER_SIGN_IN_FAIL,
+  error,
 });
 
 // ------------------------------------
@@ -51,34 +58,43 @@ export const userSignInFailAction = () => ({
 const ACTION_HANDLERS = {
   [USER_SIGN_UP]: state => ({
     ...state,
-    authenticating: true,
+    isSigningUp: true,
+    signingUpError: null,
   }),
   [USER_SIGN_UP_SUCCESS]: state => ({
     ...state,
-    authenticating: false,
+    isSigningUp: false,
+    signingUpError: null,
   }),
-  [USER_SIGN_UP_FAIL]: state => ({
+  [USER_SIGN_UP_FAIL]: (state, action) => ({
     ...state,
-    authenticating: false,
+    isSigningUp: false,
+    signingUpError: action.error,
   }),
   [USER_SIGN_IN]: state => ({
     ...state,
-    authenticating: true,
+    isSigningIn: true,
+    signingInError: null,
   }),
   [USER_SIGN_IN_SUCCESS]: state => ({
     ...state,
-    authenticating: false,
+    isSigningIn: false,
+    signingInError: null,
   }),
-  [USER_SIGN_IN_FAIL]: state => ({
+  [USER_SIGN_IN_FAIL]: (state, action) => ({
     ...state,
-    authenticating: false,
+    isSigningIn: false,
+    signingInError: action.error,
   }),
 };
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-export default function authenticationReducer(state = initialState, action = {}) {
+export default function authenticationReducer(
+  state = initialState,
+  action = {},
+) {
   const handler = ACTION_HANDLERS[action.type];
 
   return handler ? handler(state, action) : state;
