@@ -12,4 +12,12 @@ export default class ResponseNormalizer {
       message: error.message,
     };
   }
+
+  static normalize(response) {
+    if('data' in response) {
+      return response.data;
+    }
+
+    return response;
+  }
 }
