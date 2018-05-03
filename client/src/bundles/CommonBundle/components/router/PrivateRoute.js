@@ -4,12 +4,12 @@ import { Route, Redirect } from 'react-router-dom';
 
 import { SIGN_IN_ROUTE } from '../../../AuthenticationBundle/constants/routes';
 import AuthenticationGuard from '../../../AuthenticationBundle/guards/AuthenticationGuard';
-import { Consumer } from '../../../../context/ApplicationContext';
+import { Consumer } from '../../../UserBundle/context/UserContextProvider';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   /* eslint-disable react/prop-types */
   <Consumer>
-    {({ user }) => (
+    {user => (
       <Route
         {...rest}
         render={(...props) =>
