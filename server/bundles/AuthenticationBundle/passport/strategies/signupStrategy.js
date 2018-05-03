@@ -33,8 +33,9 @@ export default function(passport) {
             });
             await user.save();
             const token = await TokenService.create({
-              email: user.email,
               id: user._id,
+              email: user.email,
+              isAdmin: user.isAdmin,
             });
 
             return done(null, { user, token });
