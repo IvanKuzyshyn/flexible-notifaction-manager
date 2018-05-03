@@ -10,13 +10,15 @@ import {
 } from '../reducers/authenticationReducer';
 import { userSignUpAPI, userSignInAPI } from '../api/authenticationApi';
 import ResponseNormalizer from '../../CommonBundle/normalizers/ResponseNormalizer';
+import { setUserAction } from '../../UserBundle/reducers/userReducer';
 
 const fetchSignInAction = function*(action) {
   try {
     const { formData } = action.payload;
+    const userResponse = yield call(userSignInAPI, formData);
+    const { result: user } = ResponseNormalizer.normalize(userResponse);
 
-    const user = yield call(userSignInAPI, formData);
-
+    yield put(setUserAction(user));
     yield put(userSignInSuccessAction());
   } catch (error) {
     const e = ResponseNormalizer.normalizeError(error);
@@ -28,8 +30,10 @@ const fetchSignInAction = function*(action) {
 const fetchSignUpAction = function*(action) {
   try {
     const { formData } = action.payload;
+    const newUserResponse = yield call(userSignUpAPI, formData);
+    const { result: newUser } = ResponseNormalizer.normalize(newUserResponse);
 
-    const newUser = yield call(userSignUpAPI, formData);
+    yield put(setUserAction(newUser));
     yield put(userSignUpSuccessAction());
   } catch (error) {
     const e = ResponseNormalizer.normalizeError(error);
