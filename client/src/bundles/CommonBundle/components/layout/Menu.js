@@ -3,12 +3,12 @@ import { NavLink } from 'react-router-dom';
 import { withStyles } from 'material-ui/styles';
 import ListSubheader from 'material-ui/List/ListSubheader';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
-import DashboardIcon from '@material-ui/icons/Dashboard'
+import DashboardIcon from '@material-ui/icons/Dashboard';
 import ListIcon from '@material-ui/icons/PlaylistPlay';
-import NewIcon from '@material-ui/icons/FiberNew'
+import NewIcon from '@material-ui/icons/FiberNew';
 
 import { materialUiClassesType } from '../../prop-types/shared-types';
-import { ROOT_ROUTE } from "../../../UserBundle/constants/routes";
+import { ROOT_ROUTE } from '../../../UserBundle/constants/routes';
 
 const styles = theme => ({
   root: {
@@ -33,21 +33,25 @@ const Menu = ({ classes }) => (
           <ListItemIcon>
             <DashboardIcon />
           </ListItemIcon>
-          <ListItemText inset primary="Board" />
+          <ListItemText inset primary="Activity board" />
         </ListItem>
       </NavLink>
-      <ListItem divider button>
-        <ListItemIcon>
-          <ListIcon />
-        </ListItemIcon>
-        <ListItemText inset primary="List" />
-      </ListItem>
-      <ListItem divider button>
-        <ListItemIcon>
-          <NewIcon />
-        </ListItemIcon>
-        <ListItemText inset primary="Create" />
-      </ListItem>
+      <NavLink to="/not-implemented">
+        <ListItem divider button>
+          <ListItemIcon>
+            <ListIcon />
+          </ListItemIcon>
+          <ListItemText inset primary="Notifiers list" />
+        </ListItem>
+      </NavLink>
+      <NavLink to="/not-implemented">
+        <ListItem divider button>
+          <ListItemIcon>
+            <NewIcon />
+          </ListItemIcon>
+          <ListItemText inset primary="Create notifier" />
+        </ListItem>
+      </NavLink>
     </List>
   </div>
 );

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
@@ -19,6 +20,7 @@ import {
 } from '../../prop-types/shared-types';
 import ApplicationMenu from './Menu';
 import { Consumer } from "../../../UserBundle/context/UserContextProvider";
+import { USER_PROFILE_ROUTE } from "../../../UserBundle/constants/routes";
 
 const styles = {
   root: {
@@ -71,11 +73,11 @@ class Layout extends Component {
           <div className={classes.root}>
             <Grid container>
               <Hidden only={['xs', 'sm', 'md']}>
-                <Grid item xs={0} lg={2}>
+                <Grid item xs={false} lg={3}>
                   <ApplicationMenu />
                 </Grid>
               </Hidden>
-              <Grid item xs={12} lg={10}>
+              <Grid item xs={12} lg={9}>
                 <Drawer
                   open={isMobileMenuOpened}
                   onClose={this.handleToggleMobileMenu}
@@ -126,7 +128,7 @@ class Layout extends Component {
                           open={Boolean(userActionsAnchorEl)}
                           onClose={this.handleCloseUserActions}
                         >
-                          <MenuItem>Profile</MenuItem>
+                          <Link to={USER_PROFILE_ROUTE}><MenuItem>Profile</MenuItem></Link>
                           <MenuItem onClick={onSignIn}>Logout</MenuItem>
                         </Menu>
                       </div>
