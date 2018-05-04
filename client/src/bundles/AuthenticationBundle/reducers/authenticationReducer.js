@@ -20,6 +20,8 @@ export const USER_SIGN_IN_SUCCESS =
   '@@AuthenticationBundle/authentication/USER_SIGN_IN_SUCCESS';
 export const USER_SIGN_IN_FAIL =
   '@@AuthenticationBundle/authentication/USER_SIGN_IN_FAIL';
+export const USER_SIGN_OUT =
+  '@@AuthenticationBundle/authentication/USER_SIGN_OUT';
 
 // ------------------------------------
 // Action creators
@@ -50,6 +52,10 @@ export const userSignInSuccessAction = () => ({
 export const userSignInFailAction = error => ({
   type: USER_SIGN_IN_FAIL,
   error,
+});
+
+export const userSignOutAction = () => ({
+  type: USER_SIGN_OUT,
 });
 
 // ------------------------------------

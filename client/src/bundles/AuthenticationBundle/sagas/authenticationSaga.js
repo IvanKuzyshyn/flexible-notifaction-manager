@@ -3,6 +3,7 @@ import { takeLatest, all, call, put } from 'redux-saga/effects';
 import {
   USER_SIGN_UP,
   USER_SIGN_IN,
+  USER_SIGN_OUT,
   userSignUpSuccessAction,
   userSignUpFailAction,
   userSignInSuccessAction,
@@ -10,7 +11,7 @@ import {
 } from '../reducers/authenticationReducer';
 import { userSignUpAPI, userSignInAPI } from '../api/authenticationApi';
 import ResponseNormalizer from '../../CommonBundle/normalizers/ResponseNormalizer';
-import { setUserAction } from '../../UserBundle/reducers/userReducer';
+import { setUserAction, unsetUserAction } from '../../UserBundle/reducers/userReducer';
 
 const fetchSignInAction = function*(action) {
   try {
@@ -42,9 +43,14 @@ const fetchSignUpAction = function*(action) {
   }
 };
 
+const processSignOut = function*() {
+  yield put(unsetUserAction());
+};
+
 export default function*() {
   yield all([
     takeLatest(USER_SIGN_UP, fetchSignUpAction),
     takeLatest(USER_SIGN_IN, fetchSignInAction),
+    takeLatest(USER_SIGN_OUT, processSignOut),
   ]);
 }
