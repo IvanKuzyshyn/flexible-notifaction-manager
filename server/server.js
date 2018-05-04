@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import path from 'path';
 import passport from 'passport';
+import helmet from 'helmet';
 
 import { PORT } from './app/config/server.config';
 import { connectDb } from './app/db/db';
@@ -11,6 +12,7 @@ import authenticationRoutes from './bundles/AuthenticationBundle/routes/api';
 
 const app = express();
 
+app.use(helmet());
 // app.use('/*', express.static(path.resolve(__dirname, '../public/index.html')));
 app.use(express.static(path.resolve(__dirname, '../public')));
 
