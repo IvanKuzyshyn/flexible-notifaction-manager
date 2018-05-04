@@ -1,19 +1,9 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React from 'react';
+import { connect } from 'react-redux';
 
-class UserProfileContainer extends Component {
-
-    componentDidMount() {
-
-    }
-
-    render() {
-        return <div>UserProfileContainer</div>
-    }
-
-}
+import UserProfile from '../components/UserProfile';
 
 const mapStateToProps = state => ({});
 const mapDispatchToProps = dispatch => ({});
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserProfileContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);
