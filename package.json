@@ -17,6 +17,7 @@
     "start:dev": "./server/index.js"
   },
   "dependencies": {
+    "@material-ui/icons": "^1.0.0-beta.43",
     "axios": "^0.17.1",
     "babel-core": "^6.26.0",
     "babel-eslint": "7.2.3",
@@ -43,7 +44,7 @@
     "fwsp-server-response": "^2.2.6",
     "history": "^4.7.2",
     "jsonwebtoken": "^8.2.1",
-    "material-ui": "^1.0.0-beta.33",
+    "material-ui": "^1.0.0-beta.44",
     "mongoose": "^5.0.4",
     "mongoose-bcrypt": "^1.5.0",
     "mongoose-timestamp": "^0.6.0",
