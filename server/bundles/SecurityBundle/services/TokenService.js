@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-import { JWT_KEY } from '../../../app/config/server.config';
+import config from '../../../app/config';
 
 export default class TokenService {
   static async create(payload, options = {}) {
@@ -8,7 +8,10 @@ export default class TokenService {
       expiresIn: '1h',
     };
 
-    const token = jwt.sign(payload, JWT_KEY, { ...defaultOptions, ...options });
+    const token = jwt.sign(payload, config.jwt, {
+      ...defaultOptions,
+      ...options,
+    });
 
     return Promise.resolve(token);
   }

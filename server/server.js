@@ -4,7 +4,7 @@ import path from 'path';
 import passport from 'passport';
 import helmet from 'helmet';
 
-import { PORT } from './app/config/server.config';
+import config from './app/config';
 import { connectDb } from './app/db/db';
 // Test features
 import authenticatePassport from './bundles/AuthenticationBundle/passport/init';
@@ -43,8 +43,8 @@ app.use(function(req, res, next) {
 });
 
 const startServer = () => {
-  app.listen(process.env.PORT || PORT, () => {
-    console.log('Application started!');
+  app.listen(config.port, () => {
+    console.log(`Application started on http://localhost:${config.port}/`);
   });
 };
 

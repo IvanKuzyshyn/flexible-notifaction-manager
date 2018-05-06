@@ -1,13 +1,13 @@
 import jwt from 'jsonwebtoken';
 
 import Response from '../../CoreBundle/services/Response';
-import { JWT_KEY } from "../../../app/config/server.config";
+import config from "../../../app/config";
 
 export default function (req, res, next) {
   try {
     const { authentication } = req.headers;
 
-    jwt.verify(authentication, JWT_KEY);
+    jwt.verify(authentication, config.jwt);
     next();
   } catch (error) {
     Response.sendInvalidUserCredentials(res, {

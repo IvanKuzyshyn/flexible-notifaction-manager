@@ -1,11 +1,11 @@
 import mongoose from 'mongoose';
 
-import { connectUrl } from '../config/db.config';
+import config from '../config'
 
 export function connectDb() {
   mongoose.Promise = global.Promise;
 
-  mongoose.connect(connectUrl);
+  mongoose.connect(config.db.connection);
 
   return mongoose.connection;
 }
