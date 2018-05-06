@@ -6,14 +6,14 @@ import helmet from 'helmet';
 
 import config from './app/config';
 import { connectDb } from './app/db/db';
-// Test features
-import authenticatePassport from './bundles/AuthenticationBundle/passport/init';
-import authenticationRoutes from './bundles/AuthenticationBundle/routes/api';
+import Builder from './app/builder';
+
+// Bundles
+import AuthenticationBundle from './bundles/AuthenticationBundle/AuthenticationBundle';
 
 const app = express();
 
 app.use(helmet());
-// app.use('/*', express.static(path.resolve(__dirname, '../public/index.html')));
 app.use(express.static(path.resolve(__dirname, '../public')));
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -32,9 +32,9 @@ app.use(function(req, res, next) {
 app.use(passport.initialize());
 app.use(passport.session());
 
-authenticatePassport(passport);
-
-app.use('/', authenticationRoutes(passport));
+Builder.registerApp(app);
+Builder.registerBundle(AuthenticationBundle);
+Builder.build();
 
 app.use(function(req, res, next) {
   const err = new Error('Not Found');
