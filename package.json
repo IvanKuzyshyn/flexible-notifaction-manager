@@ -49,6 +49,7 @@
     "mongoose": "^5.0.4",
     "mongoose-bcrypt": "^1.5.0",
     "mongoose-timestamp": "^0.6.0",
+    "node-telegram-bot-api": "^0.30.0",
     "nodemon": "^1.14.12",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
