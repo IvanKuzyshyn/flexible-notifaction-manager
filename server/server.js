@@ -10,6 +10,7 @@ import Builder from './app/builder';
 
 // Bundles
 import AuthenticationBundle from './bundles/AuthenticationBundle/AuthenticationBundle';
+import TelegramBundle from './bundles/TelegramBundle/TelegramBundle';
 
 const app = express();
 
@@ -20,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // TODO Refactor with accessible service
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header(
     'Access-Control-Allow-Headers',
@@ -34,6 +35,7 @@ app.use(passport.session());
 
 Builder.registerApp(app);
 Builder.registerBundle(AuthenticationBundle);
+Builder.registerBundle(TelegramBundle);
 Builder.build();
 
 app.use(function(req, res, next) {
