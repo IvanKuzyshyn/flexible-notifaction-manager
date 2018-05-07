@@ -7,7 +7,7 @@ import initApiRoutes from './routes/api';
 
 class AuthenticationBundle implements BundleInterface {
 
-  construct(app): void {
+  construct(app: Object): void {
     initPassport(passport);
     app.use('/', initApiRoutes(passport));
   }
