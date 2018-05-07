@@ -8,4 +8,9 @@ export default rc(APP_NAME, {
   db: {
     connection: 'mongodb://localhost:27017/notifications',
   },
+  engines: {
+    telegram: {
+      token: '',
+    }
+  },
 });
