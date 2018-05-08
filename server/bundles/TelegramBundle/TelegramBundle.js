@@ -7,9 +7,7 @@ import BotFactory from './services/TelegramBotFactory';
 import Engine from './services/TelegramNotificationEngine';
 
 class TelegramBundle implements BundleInterface {
-
   construct(): void {
-    console.log('RUNNED TELEGRAM BUNDLE!');
     const factory = new BotFactory({
       token: config.engines.telegram.token,
       polling: true,
