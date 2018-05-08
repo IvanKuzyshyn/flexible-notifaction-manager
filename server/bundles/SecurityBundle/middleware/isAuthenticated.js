@@ -9,7 +9,7 @@ export default async function(req, res, next) {
     const { authorization } = req.headers;
     const user = await User.findOne({ token: authorization }).exec();
 
-    if(!user) {
+    if (!user) {
       throw new Error('Invalid token');
     }
 

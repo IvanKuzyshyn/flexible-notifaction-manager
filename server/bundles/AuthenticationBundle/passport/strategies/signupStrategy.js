@@ -16,7 +16,7 @@ export default function(passport) {
       },
       async (req, email, password, done) => {
         try {
-          const user = await User.findOne({ email });
+          const user = await User.findOne({ email }).exec();
 
           if (user) {
             return done(null, false, {
@@ -31,12 +31,13 @@ export default function(passport) {
               email,
               password,
             });
-            await user.save();
             const token = await TokenService.create({
               id: user._id,
               email: user.email,
               isAdmin: user.isAdmin,
             });
+            user.set({ token });
+            await user.save();
 
             return done(null, { user, token });
           }
