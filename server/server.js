@@ -10,6 +10,7 @@ import Builder from './app/builder';
 
 // Bundles
 import AuthenticationBundle from './bundles/AuthenticationBundle/AuthenticationBundle';
+import NotificationBundle from './bundles/NotificationBundle/NotificationBundle'
 import TelegramBundle from './bundles/TelegramBundle/TelegramBundle';
 
 const app = express();
@@ -35,6 +36,7 @@ app.use(passport.session());
 
 Builder.registerApp(app);
 Builder.registerBundle(AuthenticationBundle);
+Builder.registerBundle(NotificationBundle);
 Builder.registerBundle(TelegramBundle);
 Builder.build();
 
