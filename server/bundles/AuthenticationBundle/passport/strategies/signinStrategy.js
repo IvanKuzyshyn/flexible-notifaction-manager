@@ -39,6 +39,9 @@ export default function(passport) {
             isAdmin: user.isAdmin,
           });
 
+          user.set({ token });
+          await user.save();
+
           return done(null, { user, token });
         } catch (error) {
           done(error);
