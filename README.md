@@ -1,3 +1,3 @@
 # flexible-notifaction-manager
 
-### Status: in progress
+### Status: is frozen
