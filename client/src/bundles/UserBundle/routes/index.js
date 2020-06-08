@@ -5,6 +5,7 @@ import * as routes from '../constants/routes';
 import UserBoardContainer from '../containers/UserBoardContainer';
 import UserProfileContainer from '../containers/UserProfileContainer';
 import PrivateRoute from '../../CommonBundle/components/router/PrivateRoute';
+import NewScheduler from "../../NotificationBundle/components/schedulers/NewScheduler";
 
 const Routes = () => (
   <Fragment>
@@ -17,6 +18,10 @@ const Routes = () => (
       <PrivateRoute
         path={routes.USER_PROFILE_ROUTE}
         component={UserProfileContainer}
+      />
+      <PrivateRoute
+        path={routes.SCHEDULER}
+        component={NewScheduler}
       />
     </Switch>
   </Fragment>
