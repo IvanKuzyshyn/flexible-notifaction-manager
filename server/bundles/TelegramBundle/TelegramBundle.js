@@ -1,13 +1,13 @@
 // @flow
-import TelegramBot from 'node-telegram-bot-api';
-
 import config from '../../app/config';
 import type { BundleInterface } from '../../app/builder';
 import BotFactory from './services/TelegramBotFactory';
 import Engine from './services/TelegramNotificationEngine';
 
+import initTelegramApiRouters from './routes/api'
+
 class TelegramBundle implements BundleInterface {
-  construct(): void {
+  construct(app: Object): void {
     const factory = new BotFactory({
       token: config.engines.telegram.token,
       polling: true,
@@ -15,6 +15,8 @@ class TelegramBundle implements BundleInterface {
 
     Engine.bot = factory.create();
     Engine.start();
+
+    app.use('/', initTelegramApiRouters(Engine));
   }
 }
 
