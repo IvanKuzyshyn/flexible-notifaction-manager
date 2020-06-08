@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import path from 'path';
 import passport from 'passport';
 import helmet from 'helmet';
+import cors from 'cors';
 
 import config from './app/config';
 import { connectDb } from './app/db/db';
@@ -16,6 +17,7 @@ import TelegramBundle from './bundles/TelegramBundle/TelegramBundle';
 const app = express();
 
 app.use(helmet());
+app.use(cors());
 app.use(express.static(path.resolve(__dirname, '../public')));
 
 app.use(bodyParser.urlencoded({ extended: false }));
