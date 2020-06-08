@@ -19,7 +19,7 @@ export default function() {
     } catch (error) {
       Response.sendServerError(res, {
         statusDescription:
-          e.message || 'Error occurred while loading notifications',
+          error.message || 'Error occurred while loading notifications',
       });
     }
   });
